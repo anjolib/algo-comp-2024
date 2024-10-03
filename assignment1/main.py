@@ -33,7 +33,15 @@ def compute_score(user1, user2):
     if gap > 1:
         return 0
 
-    return 0
+    # response-based scoring
+    match = 0
+    for i in range(len(user1.responses)):
+        if user1.responses[i] == user2.responses[i]:
+            match += 1
+
+    score = match / len(user1.responses)
+
+    return score
 
 
 if __name__ == '__main__':
