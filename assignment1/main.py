@@ -28,6 +28,11 @@ def compute_score(user1, user2):
     if pref_1 == False or pref_2 == False:
         return 0
 
+    # if the grades don't touch neither do you
+    gap = abs(user1.grad_year - user2.grad_year)
+    if gap > 1:
+        return 0
+
     return 0
 
 
