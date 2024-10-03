@@ -16,8 +16,37 @@ class User:
 
 # Takes in two user objects and outputs a float denoting compatibility
 def compute_score(user1, user2):
-    # YOUR CODE HERE
-    return 0
+    # check for gender preference match
+    pref_1 = False
+    for gender in user1.preferences:
+        if user2.gender == gender:
+            pref_1 = True # user 1 -> 2
+    pref_2 = False
+    for gender in user2.preferences:
+        if user1.gender == gender:
+            pref_2 = True # user 2 -> 1
+    if pref_1 == False or pref_2 == False:
+        return 0
+
+    # if the grades don't touch neither do you
+    gap = abs(user1.grad_year - user2.grad_year)
+    if gap > 1:
+        return 0
+    elif gap == 1:
+        gap_weight = 0.9 # lower compat for grade gap
+    else:
+        gap_weight = 1
+
+    # response-based scoring
+    match = 0
+    for i in range(len(user1.responses)):
+        if user1.responses[i] == user2.responses[i]:
+            match += 1
+    raw = match / len(user1.responses)
+
+    score = raw * gap_weight
+    score = round(score, 2)
+    return score
 
 
 if __name__ == '__main__':
