@@ -32,15 +32,19 @@ def compute_score(user1, user2):
     gap = abs(user1.grad_year - user2.grad_year)
     if gap > 1:
         return 0
+    elif gap == 1:
+        gap_weight = 0.9 # lower compat for grade gap
+    else:
+        gap_weight = 1
 
     # response-based scoring
     match = 0
     for i in range(len(user1.responses)):
         if user1.responses[i] == user2.responses[i]:
             match += 1
+    raw = match / len(user1.responses)
 
-    score = match / len(user1.responses)
-
+    score = raw * gap_weight
     return score
 
 
