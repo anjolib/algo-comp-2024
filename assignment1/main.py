@@ -45,6 +45,7 @@ def compute_score(user1, user2):
     raw = match / len(user1.responses)
 
     score = raw * gap_weight
+    score = round(score, 2)
     return score
 
 
