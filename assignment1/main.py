@@ -16,7 +16,18 @@ class User:
 
 # Takes in two user objects and outputs a float denoting compatibility
 def compute_score(user1, user2):
-    # YOUR CODE HERE
+    # check for gender preference match
+    pref_1 = False
+    for gender in user1.preferences:
+        if user2.gender == gender:
+            pref_1 = True # user 1 -> 2
+    pref_2 = False
+    for gender in user2.preferences:
+        if user1.gender == gender:
+            pref_2 = True # user 2 -> 1
+    if pref_1 == False or pref_2 == False:
+        return 0
+
     return 0
 
 
