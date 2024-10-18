@@ -21,6 +21,21 @@ def run_matching(scores: List[List], gender_id: List, gender_pref: List) -> List
             - What data structure can you use to take advantage of this fact when forming your matches?
         - This is by no means an exhaustive list, feel free to reach out to us for more help!
     """
+
+    # process the scores by gender preferences
+    for i in range(len(gender_pref)):
+        if gender_pref[i] == "Bisexual":
+            continue
+        for j in range(len(gender_id)):
+            if i == j:
+                continue
+            elif (gender_pref[i] == "Men" and
+                  gender_id[j] in ("Female", "Nonbinary")):
+                scores[i][j], scores[j][i] = 0, 0
+            elif (gender_pref[i] == "Women" and
+                  gender_id[j] in ("Male", "Nonbinary")):
+                scores[i][j], scores[j][i] = 0, 0
+
     matches = [()]
     return matches
 
