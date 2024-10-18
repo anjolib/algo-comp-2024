@@ -25,8 +25,6 @@ def run_matching(scores: List[List], gender_id: List, gender_pref: List) -> List
 
     # process the scores by gender preferences
     for i in range(len(gender_pref)):
-        if gender_pref[i] == "Bisexual":
-            continue
         for j in range(len(gender_id)):
             if i == j:
                 continue
